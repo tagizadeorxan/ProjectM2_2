@@ -661,8 +661,10 @@ class Calculator {
         let futureValue = Number(input.startAmount);
         for (let i = 0; i < input.depositTerm; i++) {
           futureValue =
-            futureValue +
-            ((futureValue + input.monthlyDeposit) * percent) / 100;
+            Number(futureValue) +
+            ((Number(futureValue) + Number(input.monthlyDeposit)) *
+              Number(percent)) /
+              100;
           console.log(futureValue);
         }
 
