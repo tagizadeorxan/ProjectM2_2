@@ -637,10 +637,18 @@ function check() {
 class Application {
   static getResult(monthCheck) {
     result = dataExcel.filter(function(cal) {
-      if (monthCheck == true) {
+      if (monthCheck == true && cal.maximumDeposit != null) {
         return (
           cal.minimumDeposit <= input.startAmount &&
-          // cal.maximumDeposit >= input.startAmount &&
+          cal.maximumDeposit >= input.startAmount &&
+          cal.minimumTerm <= input.depositTerm &&
+          cal.MaximumTerm >= input.depositTerm &&
+          cal.Currency == input.priceInput &&
+          cal.avaliableMonthly == "TRUE"
+        );
+      } else if (monthCheck == true && cal.maximumDeposit == null) {
+        return (
+          cal.minimumDeposit <= input.startAmount &&
           cal.minimumTerm <= input.depositTerm &&
           cal.MaximumTerm >= input.depositTerm &&
           cal.Currency == input.priceInput &&
@@ -649,7 +657,8 @@ class Application {
       } else {
         return (
           cal.minimumDeposit <= input.startAmount &&
-          //cal.maximumDeposit >= input.startAmount &&
+          //cal.maximumDeposit != null &&
+          // cal.maximumDeposit >= input.startAmount &&
           cal.minimumTerm <= input.depositTerm &&
           cal.MaximumTerm >= input.depositTerm &&
           cal.Currency == input.priceInput &&
