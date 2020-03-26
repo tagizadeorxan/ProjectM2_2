@@ -683,12 +683,12 @@ class Calculator {
         for (let i = 0; i < input.depositTerm; i++) {
           futureValue =
             Number(futureValue) +
-            ((Number(futureValue) + Number(input.monthlyDeposit)) *
-              Number(percent)) /
-              12 /
-              100;
+            (Number(futureValue) * Number(percent)) / 12 / 100 +
+            Number(input.monthlyDeposit);
           console.log(futureValue);
         }
+
+        futureValue = futureValue - Number(input.monthlyDeposit);
 
         arr[i + 1] = BankDeposit.getRowCode(
           bankName,
