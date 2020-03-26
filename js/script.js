@@ -675,7 +675,7 @@ class Calculator {
       const arr = [];
       arr[0] =
         "<table><tr><th>Bank Name</th><th>Deposit</th><th>Percent</th><th>Future Value</th></tr>";
-      for (let i = 0; i < result.length; i++) {
+      for (let i = 0; i < 2; i++) {
         const bankName = result[i].Bank;
         const deposit = result[i].Deposit;
         const percent = result[i].monthlyDeposit;
