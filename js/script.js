@@ -664,7 +664,7 @@ class Application {
 
 class Calculator {
   static drawTable(result) {
-    // result.sort();
+    result.sort((a, b) => (a.monthlyDeposit < b.monthlyDeposit ? 1 : -1));
     container.className = "noneDisplay";
     if (result.length < 1) {
       setTimeout(function() {
