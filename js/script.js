@@ -607,11 +607,21 @@ function check() {
   let depositTerm = document.getElementById("depositTerm").value;
   let priceInput = document.getElementById("currency").value;
   let monthCheck = true;
-  if (startAmount > 0 && monthlyDeposit > 0 && depositTerm > 0) {
+  if (
+    startAmount > 0 &&
+    monthlyDeposit > 0 &&
+    depositTerm > 0 &&
+    depositTerm % 1 == 0
+  ) {
     input = new Deposit(startAmount, monthlyDeposit, depositTerm, priceInput);
     console.log(input);
     Application.getResult(monthCheck);
-  } else if (startAmount > 0 && monthlyDeposit == 0 && depositTerm > 0) {
+  } else if (
+    startAmount > 0 &&
+    monthlyDeposit == 0 &&
+    depositTerm > 0 &&
+    depositTerm % 1 == 0
+  ) {
     input = new Deposit(startAmount, monthlyDeposit, depositTerm, priceInput);
     console.log(input);
     monthCheck = false;
@@ -630,14 +640,18 @@ class Application {
       if (monthCheck == true) {
         return (
           cal.minimumDeposit <= input.startAmount &&
+          // cal.maximumDeposit >= input.startAmount &&
           cal.minimumTerm <= input.depositTerm &&
+          cal.MaximumTerm >= input.depositTerm &&
           cal.Currency == input.priceInput &&
           cal.avaliableMonthly == "TRUE"
         );
       } else {
         return (
           cal.minimumDeposit <= input.startAmount &&
+          //cal.maximumDeposit >= input.startAmount &&
           cal.minimumTerm <= input.depositTerm &&
+          cal.MaximumTerm >= input.depositTerm &&
           cal.Currency == input.priceInput &&
           cal.avaliableMonthly == "FALSE"
         );
@@ -650,6 +664,7 @@ class Application {
 
 class Calculator {
   static drawTable(result) {
+    // result.sort();
     container.className = "noneDisplay";
     if (result.length < 1) {
       setTimeout(function() {
@@ -670,6 +685,7 @@ class Calculator {
             Number(futureValue) +
             ((Number(futureValue) + Number(input.monthlyDeposit)) *
               Number(percent)) /
+              12 /
               100;
           console.log(futureValue);
         }
