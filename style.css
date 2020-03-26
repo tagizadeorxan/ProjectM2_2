@@ -71,3 +71,11 @@ h2 {
 body {
   font-family: "Roboto", sans-serif;
 }
+
+.noneDisplay {
+  display: none;
+}
+
+.container-design {
+  border: 1px solid #cccccc;
+}

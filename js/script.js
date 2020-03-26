@@ -584,13 +584,14 @@ let dataExcel = [
   }
 ];
 
+const container = document.getElementById("container");
 let button = document.getElementById("button");
 
 button.addEventListener("click", check);
 
 let input;
-
-class Input {
+let result = [];
+class Deposit {
   constructor(startAmount, monthlyDeposit, depositTerm, priceInput) {
     this.startAmount = startAmount;
     this.monthlyDeposit = monthlyDeposit;
@@ -600,90 +601,98 @@ class Input {
 }
 
 function check() {
+  container.className = "noneDisplay";
   let startAmount = document.getElementById("startAmount").value;
   let monthlyDeposit = document.getElementById("monthlyDeposit").value;
   let depositTerm = document.getElementById("depositTerm").value;
   let priceInput = document.getElementById("currency").value;
   let monthCheck = true;
   if (startAmount > 0 && monthlyDeposit > 0 && depositTerm > 0) {
-    input = new Input(startAmount, monthlyDeposit, depositTerm, priceInput);
+    input = new Deposit(startAmount, monthlyDeposit, depositTerm, priceInput);
     console.log(input);
-    getResult(monthCheck);
+    Application.getResult(monthCheck);
   } else if (startAmount > 0 && monthlyDeposit == 0 && depositTerm > 0) {
-    input = new Input(startAmount, monthlyDeposit, depositTerm, priceInput);
+    input = new Deposit(startAmount, monthlyDeposit, depositTerm, priceInput);
     console.log(input);
     monthCheck = false;
-    getResult(monthCheck);
+    Application.getResult(monthCheck);
   } else {
     alert("Input is not correct");
   }
 }
 
-let result = [];
-function getResult(monthCheck) {
-  result = dataExcel.filter(function(cal) {
-    if (monthCheck == true) {
-      return (
-        cal.minimumDeposit <= input.startAmount &&
-        cal.minimumTerm <= input.depositTerm &&
-        cal.Currency == input.priceInput &&
-        cal.avaliableMonthly == "TRUE"
-      );
-    } else {
-      return (
-        cal.minimumDeposit <= input.startAmount &&
-        cal.minimumTerm <= input.depositTerm &&
-        cal.Currency == input.priceInput &&
-        cal.avaliableMonthly == "FALSE"
-      );
-    }
-  });
-  drawTable(result);
-}
-
-function drawTable(result) {
-  if (result.length < 1) {
-    alert("sorry no option avaliable for this input");
-  } else {
-    const container = document.getElementById("container");
-    const arr = [];
-    arr[0] =
-      "<table><tr><th>Bank Name</th><th>Deposit</th><th>Percent</th><th>Future Value</th></tr>";
-    for (let i = 0; i < result.length; i++) {
-      const bankName = result[i].Bank;
-      const deposit = result[i].Deposit;
-      const percent = result[i].monthlyDeposit;
-      let futureValue = Number(input.startAmount);
-      for (let i = 0; i < input.depositTerm; i++) {
-        futureValue =
-          futureValue + ((futureValue + input.monthlyDeposit) * percent) / 100;
-        console.log(futureValue);
+class Application {
+  static getResult(monthCheck) {
+    result = dataExcel.filter(function(cal) {
+      if (monthCheck == true) {
+        return (
+          cal.minimumDeposit <= input.startAmount &&
+          cal.minimumTerm <= input.depositTerm &&
+          cal.Currency == input.priceInput &&
+          cal.avaliableMonthly == "TRUE"
+        );
+      } else {
+        return (
+          cal.minimumDeposit <= input.startAmount &&
+          cal.minimumTerm <= input.depositTerm &&
+          cal.Currency == input.priceInput &&
+          cal.avaliableMonthly == "FALSE"
+        );
       }
+    });
 
-      arr[i + 1] = this.getRowCode(
-        bankName,
-        deposit,
-        percent,
-        Math.round(futureValue),
-        "tr" + i
-      );
-    }
-    container.innerHTML = "<table>" + arr.join("") + "</table>";
+    Calculator.drawTable(result);
   }
 }
 
-function getRowCode(bankName, deposit, percent, futureValue, id) {
-  const bankNamePart = "<td>" + bankName + "</td>";
-  const depositPart = "<td>" + deposit + "</td>";
-  const percentPart = "<td>" + percent + "</td>";
-  const futureValuePart = "<td>" + futureValue + "</td>";
+class Calculator {
+  static drawTable(result) {
+    if (result.length < 1) {
+      alert("sorry no option avaliable for this input");
+    } else {
+      container.className = "container-design";
+      const arr = [];
+      arr[0] =
+        "<table><tr><th>Bank Name</th><th>Deposit</th><th>Percent</th><th>Future Value</th></tr>";
+      for (let i = 0; i < result.length; i++) {
+        const bankName = result[i].Bank;
+        const deposit = result[i].Deposit;
+        const percent = result[i].monthlyDeposit;
+        let futureValue = Number(input.startAmount);
+        for (let i = 0; i < input.depositTerm; i++) {
+          futureValue =
+            futureValue +
+            ((futureValue + input.monthlyDeposit) * percent) / 100;
+          console.log(futureValue);
+        }
 
-  let row =
-    `<tr class="active" id=${id}>` +
-    bankNamePart +
-    depositPart +
-    percentPart +
-    futureValuePart +
-    "</tr>";
-  return row;
+        arr[i + 1] = BankDeposit.getRowCode(
+          bankName,
+          deposit,
+          percent,
+          Math.round(futureValue),
+          "tr" + i
+        );
+      }
+      container.innerHTML = "<table>" + arr.join("") + "</table>";
+    }
+  }
+}
+
+class BankDeposit {
+  static getRowCode(bankName, deposit, percent, futureValue, id) {
+    const bankNamePart = "<td>" + bankName + "</td>";
+    const depositPart = "<td>" + deposit + "</td>";
+    const percentPart = "<td>" + percent + "</td>";
+    const futureValuePart = "<td>" + futureValue + "</td>";
+
+    let row =
+      `<tr class="active" id=${id}>` +
+      bankNamePart +
+      depositPart +
+      percentPart +
+      futureValuePart +
+      "</tr>";
+    return row;
+  }
 }
