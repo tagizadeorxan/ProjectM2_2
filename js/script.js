@@ -617,7 +617,10 @@ function check() {
     monthCheck = false;
     Application.getResult(monthCheck);
   } else {
-    alert("Input is not correct");
+    container.className = "noneDisplay";
+    setTimeout(function() {
+      alert("Input is not correct");
+    }, 2000);
   }
 }
 
@@ -647,8 +650,11 @@ class Application {
 
 class Calculator {
   static drawTable(result) {
+    container.className = "noneDisplay";
     if (result.length < 1) {
-      alert("sorry no option avaliable for this input");
+      setTimeout(function() {
+        alert("sorry no option avaliable for this input");
+      }, 2000);
     } else {
       container.className = "container-design";
       const arr = [];
