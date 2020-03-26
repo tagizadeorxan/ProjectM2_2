@@ -13,17 +13,51 @@
       href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <h1 id="head" class="">Loading</h1>
-    <div>
-      <input id="inputAmount" type="number" />
-      <input id="inputYear" type="number" />
-      <button id="button" type="submit">Calculate</button>
+    <h2>Selection of the optimal contribution</h2>
+
+    <div class="add-form">
+      <div class="input-with-caption">
+        <div>Start Amount</div>
+        <div>
+          <input id="startAmount" type="number" placeholder="Start Amount.." />
+        </div>
+      </div>
+      <div class="input-with-caption">
+        <div>Monthly Deposit</div>
+        <div>
+          <input
+            id="monthlyDeposit"
+            type="number"
+            placeholder="Monthly Deposit.."
+          />
+        </div>
+      </div>
+      <div class="input-with-caption">
+        <div>Deposit Term (month)</div>
+        <div>
+          <input id="depositTerm" type="number" placeholder="Deposit Term.." />
+        </div>
+      </div>
+      <div class="input-with-caption">
+        <div>Currency</div>
+        <div>
+          <select id="currency" name="country">
+            <option value="RUB">RUB</option>
+            <option value="USD">USD</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="button">Search</div>
     </div>
-
-    <div id="div1"></div>
-
+    <br />
+    <div id="container"></div>
     <script src="js/script.js"></script>
   </body>
 </html>

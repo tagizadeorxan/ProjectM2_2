@@ -1,234 +1,689 @@
-// // const cards = [
-// //   {
-// //     cardNumber: "7437 4553 9630 3531",
-// //     name: "George Washington",
-// //     expired: "12/22"
-// //   },
-// //   { cardNumber: "6382 5282 6825 8519", name: "John Adams", expired: "08/23" },
-// //   {
-// //     cardNumber: "5418 5162 9272 9262",
-// //     name: "Thomas Jefferson",
-// //     expired: "02/23"
-// //   },
-// //   {
-// //     cardNumber: "8652 7262 6283 9723",
-// //     name: "James Madison",
-// //     expired: "11/20"
-// //   },
-// //   { cardNumber: "8265 6280 7528 0987", name: "James Monroe", expired: "09/21" }
-// // ];
+let dataExcel = [
+  {
+    Bank: "Газпромбанк",
+    Deposit: "Ваш успех",
+    Currency: "RUB",
+    monthlyDeposit: 6.22,
+    minimumDeposit: 50000,
+    maximumDeposit: null,
+    minimumTerm: 12,
+    MaximumTerm: 12,
+    avaliableMonthly: "FALSE"
+  },
+  {
+    Bank: "Кредит Европа Банк",
+    Deposit: "Оптимальный на 2 года",
+    Currency: "RUB",
+    monthlyDeposit: 6.45,
+    minimumDeposit: 100000,
+    maximumDeposit: null,
+    minimumTerm: 24,
+    MaximumTerm: 24,
+    avaliableMonthly: "FALSE"
+  },
+  {
+    Bank: "Банк Зенит",
+    Deposit: "Праздничный 500+",
+    Currency: "RUB",
+    monthlyDeposit: 6,
+    minimumDeposit: 30000,
+    maximumDeposit: null,
+    minimumTerm: 17,
+    MaximumTerm: 17,
+    avaliableMonthly: "FALSE"
+  },
+  {
+    Bank: "Еврофинанс Моснарбанк",
+    Deposit: "Классический",
+    Currency: "RUB",
+    monthlyDeposit: 6.95,
+    minimumDeposit: 30000,
+    maximumDeposit: null,
+    minimumTerm: 12,
+    MaximumTerm: 24,
+    avaliableMonthly: "FALSE"
+  },
+  {
+    Bank: "Джей энд Ти Банк",
+    Deposit: "Магнус-Онлайн",
+    Currency: "RUB",
+    monthlyDeposit: 6.8,
+    minimumDeposit: 100000,
+    maximumDeposit: null,
+    minimumTerm: 6,
+    MaximumTerm: 6,
+    avaliableMonthly: "FALSE"
+  },
+  {
+    Bank: "МТС Банк",
+    Deposit: "В вашу пользу",
+    Currency: "RUB",
+    monthlyDeposit: 6.75,
+    minimumDeposit: 50000,
+    maximumDeposit: null,
+    minimumTerm: 12,
+    MaximumTerm: 12,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Эс-Би-Ай Банк",
+    Deposit: "Свои правила Онлайн",
+    Currency: "RUB",
+    monthlyDeposit: 6.7,
+    minimumDeposit: 30000,
+    maximumDeposit: 30000000,
+    minimumTerm: 24,
+    MaximumTerm: 24,
+    avaliableMonthly: "FALSE"
+  },
+  {
+    Bank: "Банк Уралсиб",
+    Deposit: "Прогноз отличный",
+    Currency: "RUB",
+    monthlyDeposit: 6.7,
+    minimumDeposit: 100000,
+    maximumDeposit: null,
+    minimumTerm: 37,
+    MaximumTerm: 37,
+    avaliableMonthly: "FALSE"
+  },
+  {
+    Bank: "Инвестторгбанк",
+    Deposit: "ИТБ-Постоянный доход",
+    Currency: "RUB",
+    monthlyDeposit: 6.6,
+    minimumDeposit: 50000,
+    maximumDeposit: null,
+    minimumTerm: 37,
+    MaximumTerm: 37,
+    avaliableMonthly: "FALSE"
+  },
+  {
+    Bank: "Транскапиталбанк",
+    Deposit: "ТКБ.Постоянный доход",
+    Currency: "RUB",
+    monthlyDeposit: 6.6,
+    minimumDeposit: 50000,
+    maximumDeposit: null,
+    minimumTerm: 37,
+    MaximumTerm: 37,
+    avaliableMonthly: "FALSE"
+  },
+  {
+    Bank: "Совкомбанк",
+    Deposit: "Зимний праздник с Халвой",
+    Currency: "RUB",
+    monthlyDeposit: 5.6,
+    minimumDeposit: 50000,
+    maximumDeposit: null,
+    minimumTerm: 2,
+    MaximumTerm: 2,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Агророс",
+    Deposit: "Медовый месяц",
+    Currency: "RUB",
+    monthlyDeposit: 5.51,
+    minimumDeposit: 20000,
+    maximumDeposit: null,
+    minimumTerm: 1,
+    MaximumTerm: 1,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Росдорбанк",
+    Deposit: "Онлайн-1",
+    Currency: "RUB",
+    monthlyDeposit: 5.1,
+    minimumDeposit: 100000,
+    maximumDeposit: 150000000,
+    minimumTerm: 1,
+    MaximumTerm: 1,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Национальный Стандарт",
+    Deposit: "Сберегательный стандарт",
+    Currency: "RUB",
+    monthlyDeposit: 5.1,
+    minimumDeposit: 100000,
+    maximumDeposit: null,
+    minimumTerm: 1,
+    MaximumTerm: 3,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Россия",
+    Deposit: "Морозные узоры",
+    Currency: "RUB",
+    monthlyDeposit: 5,
+    minimumDeposit: 100000,
+    maximumDeposit: null,
+    minimumTerm: 1,
+    MaximumTerm: 1,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Кузнецкий Мост",
+    Deposit: "Накопительный",
+    Currency: "RUB",
+    monthlyDeposit: 4.85,
+    minimumDeposit: 50000,
+    maximumDeposit: null,
+    minimumTerm: 1,
+    MaximumTerm: 3,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Тексбанк",
+    Deposit: "Универсальный",
+    Currency: "RUB",
+    monthlyDeposit: 4.6,
+    minimumDeposit: 10000,
+    maximumDeposit: null,
+    minimumTerm: 1,
+    MaximumTerm: 1,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Морской Банк",
+    Deposit: "Правильным курсом +",
+    Currency: "RUB",
+    monthlyDeposit: 4.55,
+    minimumDeposit: 100000,
+    maximumDeposit: null,
+    minimumTerm: 1,
+    MaximumTerm: 3,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Норвик Банк",
+    Deposit: "Лаконичный",
+    Currency: "RUB",
+    monthlyDeposit: 4.5,
+    minimumDeposit: 500,
+    maximumDeposit: 50000000,
+    minimumTerm: 1,
+    MaximumTerm: 1,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Промсельхозбанк",
+    Deposit: "Конструктор",
+    Currency: "RUB",
+    monthlyDeposit: 4.5,
+    minimumDeposit: 10000,
+    maximumDeposit: null,
+    minimumTerm: 1,
+    MaximumTerm: 3,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Акибанк",
+    Deposit: "Онлайн",
+    Currency: "RUB",
+    monthlyDeposit: 6.5,
+    minimumDeposit: 1000,
+    maximumDeposit: null,
+    minimumTerm: 6,
+    MaximumTerm: 6,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Банк БКФ",
+    Deposit: "Ключевой стандарт",
+    Currency: "RUB",
+    monthlyDeposit: 6.5,
+    minimumDeposit: 100000,
+    maximumDeposit: null,
+    minimumTerm: 6,
+    MaximumTerm: 13,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Экспобанк",
+    Deposit: "Специальный (в конце срока)",
+    Currency: "RUB",
+    monthlyDeposit: 6.35,
+    minimumDeposit: 50000,
+    maximumDeposit: 10000000,
+    minimumTerm: 6,
+    MaximumTerm: 6,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Инвестторгбанк",
+    Deposit: "ИТБ-Пополняемый",
+    Currency: "RUB",
+    monthlyDeposit: 6.15,
+    minimumDeposit: 50000,
+    maximumDeposit: 30000000,
+    minimumTerm: 6,
+    MaximumTerm: 6,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Транскапиталбанк",
+    Deposit: "ТКБ.Пополняемый",
+    Currency: "RUB",
+    monthlyDeposit: 6.15,
+    minimumDeposit: 50000,
+    maximumDeposit: 30000000,
+    minimumTerm: 6,
+    MaximumTerm: 6,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Евроазиатский Инвестиционный Банк",
+    Deposit: "Классика",
+    Currency: "RUB",
+    monthlyDeposit: 6.1,
+    minimumDeposit: 100000,
+    maximumDeposit: null,
+    minimumTerm: 6,
+    MaximumTerm: 12,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Тимер Банк",
+    Deposit: "Надежный выбор",
+    Currency: "RUB",
+    monthlyDeposit: 6,
+    minimumDeposit: 10000,
+    maximumDeposit: null,
+    minimumTerm: 6,
+    MaximumTerm: 6,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Евразийский Банк",
+    Deposit: "TURBO MAXIMUM",
+    Currency: "RUB",
+    monthlyDeposit: 6,
+    minimumDeposit: 30000,
+    maximumDeposit: 299999,
+    minimumTerm: 6,
+    MaximumTerm: 6,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Таврический Банк",
+    Deposit: "Достижимый (онлайн)",
+    Currency: "RUB",
+    monthlyDeposit: 6,
+    minimumDeposit: 50000,
+    maximumDeposit: null,
+    minimumTerm: 6,
+    MaximumTerm: 6,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Экспобанк",
+    Deposit: "Юбилейный 25 (в конце срока)",
+    Currency: "RUB",
+    monthlyDeposit: 6.5,
+    minimumDeposit: 100000,
+    maximumDeposit: 20000000,
+    minimumTerm: 12,
+    MaximumTerm: 12,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Крокус-Банк",
+    Deposit: "Ежемесячный доход",
+    Currency: "RUB",
+    monthlyDeposit: 6.35,
+    minimumDeposit: 50000,
+    maximumDeposit: null,
+    minimumTerm: 12,
+    MaximumTerm: 12,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Промсельхозбанк",
+    Deposit: "Ваш выбор",
+    Currency: "RUB",
+    monthlyDeposit: 6.3,
+    minimumDeposit: 10000,
+    maximumDeposit: null,
+    minimumTerm: 12,
+    MaximumTerm: 12,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Нацинвестпромбанк",
+    Deposit: "Прибыльный",
+    Currency: "RUB",
+    monthlyDeposit: 6.3,
+    minimumDeposit: 50000,
+    maximumDeposit: null,
+    minimumTerm: 12,
+    MaximumTerm: 12,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Ишбанк",
+    Deposit: "Накопительный",
+    Currency: "RUB",
+    monthlyDeposit: 6.25,
+    minimumDeposit: 100000,
+    maximumDeposit: null,
+    minimumTerm: 12,
+    MaximumTerm: 12,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Примсоцбанк",
+    Deposit: "Новогодний чулок (333 дня)",
+    Currency: "RUB",
+    monthlyDeposit: 6.2,
+    minimumDeposit: 10000,
+    maximumDeposit: null,
+    minimumTerm: 11,
+    MaximumTerm: 11,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Еврофинанс Моснарбанк",
+    Deposit: "Пополняемый",
+    Currency: "RUB",
+    monthlyDeposit: 6.75,
+    minimumDeposit: 1000000,
+    maximumDeposit: null,
+    minimumTerm: 12,
+    MaximumTerm: 24,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Евроазиатский Инвестиционный Банк",
+    Deposit: "VIP",
+    Currency: "RUB",
+    monthlyDeposit: 6.35,
+    minimumDeposit: 1000000,
+    maximumDeposit: null,
+    minimumTerm: 9,
+    MaximumTerm: 12,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Российская Финансовая Корпорация",
+    Deposit: "Универсальный",
+    Currency: "RUB",
+    monthlyDeposit: 6,
+    minimumDeposit: 5000,
+    maximumDeposit: null,
+    minimumTerm: 3,
+    MaximumTerm: 3,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Московский Кредитный Банк",
+    Deposit: "МЕГА Онлайн",
+    Currency: "RUB",
+    monthlyDeposit: 5.8,
+    minimumDeposit: 1000,
+    maximumDeposit: null,
+    minimumTerm: 3,
+    MaximumTerm: 5,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Александровский",
+    Deposit: "Черника 19/20",
+    Currency: "RUB",
+    monthlyDeposit: 5.6,
+    minimumDeposit: 20000,
+    maximumDeposit: null,
+    minimumTerm: 3,
+    MaximumTerm: 3,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Финанс Бизнес Банк",
+    Deposit: "Мандариновый!",
+    Currency: "RUB",
+    monthlyDeposit: 5.6,
+    minimumDeposit: 50000,
+    maximumDeposit: null,
+    minimumTerm: 3,
+    MaximumTerm: 3,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "ЦентроКредит",
+    Deposit: "Доход Плюс",
+    Currency: "USD",
+    monthlyDeposit: 1.15,
+    minimumDeposit: 5000,
+    maximumDeposit: null,
+    minimumTerm: 3,
+    MaximumTerm: 3,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Совкомбанк",
+    Deposit: "Удобный (в долларах)",
+    Currency: "USD",
+    monthlyDeposit: 1,
+    minimumDeposit: 500,
+    maximumDeposit: null,
+    minimumTerm: 3,
+    MaximumTerm: 6,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Веста",
+    Deposit: "Веста - Копилка",
+    Currency: "USD",
+    monthlyDeposit: 1,
+    minimumDeposit: 10000,
+    maximumDeposit: null,
+    minimumTerm: 3,
+    MaximumTerm: 6,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Славия",
+    Deposit: "Славный Капитал",
+    Currency: "USD",
+    monthlyDeposit: 0.85,
+    minimumDeposit: 5000,
+    maximumDeposit: null,
+    minimumTerm: 3,
+    MaximumTerm: 4,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Роскосмосбанк",
+    Deposit: "Комфортный",
+    Currency: "USD",
+    monthlyDeposit: 0.8,
+    minimumDeposit: 500,
+    maximumDeposit: null,
+    minimumTerm: 3,
+    MaximumTerm: 6,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "ФорБанк",
+    Deposit: "Срочный накопительный",
+    Currency: "USD",
+    monthlyDeposit: 0.8,
+    minimumDeposit: 10000,
+    maximumDeposit: 500000,
+    minimumTerm: 3,
+    MaximumTerm: 3,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Московский Областной Банк",
+    Deposit: "Гарантированный доллар",
+    Currency: "USD",
+    monthlyDeposit: 0.75,
+    minimumDeposit: 50,
+    maximumDeposit: null,
+    minimumTerm: 4,
+    MaximumTerm: 4,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Объединенный Резервный Банк",
+    Deposit: "ОРБ-Накопительный (в конце срока)",
+    Currency: "USD",
+    monthlyDeposit: 1.6,
+    minimumDeposit: 1000,
+    maximumDeposit: null,
+    minimumTerm: 12,
+    MaximumTerm: 12,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Банк Агора",
+    Deposit: "Срочный",
+    Currency: "USD",
+    monthlyDeposit: 1.5,
+    minimumDeposit: 1000,
+    maximumDeposit: null,
+    minimumTerm: 12,
+    MaximumTerm: 12,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Тинькофф Банк",
+    Deposit: "СмартВклад (с повышенной ставкой)",
+    Currency: "USD",
+    monthlyDeposit: 1.5,
+    minimumDeposit: 1000,
+    maximumDeposit: null,
+    minimumTerm: 12,
+    MaximumTerm: 12,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Первый Инвестиционный Банк",
+    Deposit: "Закон сохранения",
+    Currency: "USD",
+    monthlyDeposit: 1.5,
+    minimumDeposit: 1000,
+    maximumDeposit: null,
+    minimumTerm: 12,
+    MaximumTerm: 12,
+    avaliableMonthly: "TRUE"
+  },
+  {
+    Bank: "Новый Век",
+    Deposit: "Сберегательный",
+    Currency: "USD",
+    monthlyDeposit: 1.5,
+    minimumDeposit: 5000,
+    maximumDeposit: 20000,
+    minimumTerm: 12,
+    MaximumTerm: 12,
+    avaliableMonthly: "TRUE"
+  }
+];
 
-// // // // Образец определения и вызова функций
+let button = document.getElementById("button");
 
-// // // function checkCardExpiredYear(card) {
-// // //   return Number(card.expired.slice(-2)) > 21;
-// // // }
+button.addEventListener("click", check);
 
-// // // function checkCardType(card) {
-// // //   let digit = Number(card.cardNumber[0]);
-// // //   if (digit == 4) {
-// // //     return true;
-// // //   } else if (digit == 5) {
-// // //     return false;
-// // //   } else {
-// // //     return false;
-// // //   }
-// // // }
+let input;
 
-// // // console.log(cards.filter(checkCardExpiredYear));
-// // // console.log("-------------------------------");
-// // // console.log(cards.filter(checkCardType));
-// // // console.log("-------------------------------");
+class Input {
+  constructor(startAmount, monthlyDeposit, depositTerm, priceInput) {
+    this.startAmount = startAmount;
+    this.monthlyDeposit = monthlyDeposit;
+    this.depositTerm = depositTerm;
+    this.priceInput = priceInput;
+  }
+}
 
-// // const clients = [
-// //   { name: "John", gender: "m", birthYear: 1974 },
-// //   { name: "Bill", gender: "m", birthYear: 1985 },
-// //   { name: "Clara", gender: "w", birthYear: 1994 },
-// //   { name: "Ian", gender: "m", birthYear: 1940 }
-// // ];
+function check() {
+  let startAmount = document.getElementById("startAmount").value;
+  let monthlyDeposit = document.getElementById("monthlyDeposit").value;
+  let depositTerm = document.getElementById("depositTerm").value;
+  let priceInput = document.getElementById("currency").value;
+  let monthCheck = true;
+  if (startAmount > 0 && monthlyDeposit > 0 && depositTerm > 0) {
+    input = new Input(startAmount, monthlyDeposit, depositTerm, priceInput);
+    console.log(input);
+    getResult(monthCheck);
+  } else if (startAmount > 0 && monthlyDeposit == 0 && depositTerm > 0) {
+    input = new Input(startAmount, monthlyDeposit, depositTerm, priceInput);
+    console.log(input);
+    monthCheck = false;
+    getResult(monthCheck);
+  } else {
+    alert("Input is not correct");
+  }
+}
 
-// // function map(array, callbackFunction) {
-// //   let result = [];
-// //   for (let i = 0; i < array.length; i++) {
-// //     result.push(callbackFunction(array[i]));
-// //   }
-// //   return result;
-// // }
-// // function getNameOfClient(client) {
-// //   return client.name;
-// // }
-// // function getBirthYear(client) {
-// //   return client.birthYear;
-// // }
+let result = [];
+function getResult(monthCheck) {
+  result = dataExcel.filter(function(cal) {
+    if (monthCheck == true) {
+      return (
+        cal.minimumDeposit <= input.startAmount &&
+        cal.minimumTerm <= input.depositTerm &&
+        cal.Currency == input.priceInput &&
+        cal.avaliableMonthly == "TRUE"
+      );
+    } else {
+      return (
+        cal.minimumDeposit <= input.startAmount &&
+        cal.minimumTerm <= input.depositTerm &&
+        cal.Currency == input.priceInput &&
+        cal.avaliableMonthly == "FALSE"
+      );
+    }
+  });
+  drawTable(result);
+}
 
-// // console.log(map(clients, getNameOfClient)); // ['John', 'Bill', 'Clara', 'Ian']
+function drawTable(result) {
+  if (result.length < 1) {
+    alert("sorry no option avaliable for this input");
+  } else {
+    const container = document.getElementById("container");
+    const arr = [];
+    arr[0] =
+      "<table><tr><th>Bank Name</th><th>Deposit</th><th>Percent</th><th>Future Value</th></tr>";
+    for (let i = 0; i < result.length; i++) {
+      const bankName = result[i].Bank;
+      const deposit = result[i].Deposit;
+      const percent = result[i].monthlyDeposit;
+      let futureValue = Number(input.startAmount);
+      for (let i = 0; i < input.depositTerm; i++) {
+        futureValue =
+          futureValue + ((futureValue + input.monthlyDeposit) * percent) / 100;
+        console.log(futureValue);
+      }
 
-// // console.log(map(clients, getBirthYear)); //[1974, 1985, 1994, 1940]
+      arr[i + 1] = this.getRowCode(
+        bankName,
+        deposit,
+        percent,
+        Math.round(futureValue),
+        "tr" + i
+      );
+    }
+    container.innerHTML = "<table>" + arr.join("") + "</table>";
+  }
+}
 
-// // let filtered = clients.filter(function(client) {
-// //   return client.birthYear > 1900;
-// // });
+function getRowCode(bankName, deposit, percent, futureValue, id) {
+  const bankNamePart = "<td>" + bankName + "</td>";
+  const depositPart = "<td>" + deposit + "</td>";
+  const percentPart = "<td>" + percent + "</td>";
+  const futureValuePart = "<td>" + futureValue + "</td>";
 
-// // console.log(filtered);
-
-// // const cards = [
-// //   {
-// //     cardNumber: "7437 4553 9630 3531",
-// //     name: "George Washington",
-// //     expired: "12/22"
-// //   },
-// //   { cardNumber: "6382 5282 6825 8519", name: "John Adams", expired: "08/23" },
-// //   {
-// //     cardNumber: "5418 5162 9272 9262",
-// //     name: "Thomas Jefferson",
-// //     expired: "02/23"
-// //   },
-// //   {
-// //     cardNumber: "8652 7262 6283 9723",
-// //     name: "James Madison",
-// //     expired: "11/20"
-// //   },
-// //   { cardNumber: "8265 6280 7528 0987", name: "James Monroe", expired: "09/21" }
-// // ];
-
-// // // Образец определения и вызова функций
-// // function filterCreditCards(creditCards, callbackFunction) {
-// //   let result = [];
-// //   for (let i = 0; i < creditCards.length; i++) {
-// //     if (callbackFunction(creditCards[i]) == true) {
-// //       result.push(creditCards[i]);
-// //     }
-// //   }
-// //   return result;
-// // }
-
-// // function checkCardExpiredYear(card) {
-// //   if (Number(card.expired.slice(-2)) > 21) {
-// //     return true;
-// //   } else {
-// //     return false;
-// //   }
-// // }
-
-// // function checkCardType(card) {
-// //   let digit = Number(card.cardNumber.slice(0, 1));
-// //   console.log(digit);
-// //   if (digit == 4) {
-// //     return true;
-// //   } else {
-// //     return false;
-// //   }
-// // }
-
-// // console.log(filterCreditCards(cards, checkCardExpiredYear));
-// // console.log("-------------------------------");
-// // console.log(filterCreditCards(cards, checkCardType));
-// // console.log("-------------------------------");
-
-// // class Client {
-// //   constructor(id, name) {
-// //     this.id = id;
-// //     this.name = name;
-// //   }
-// // }
-
-// // const queue = [];
-// // let id = 0;
-
-// // function addClientToQueue(queue, clientData) {
-// //   id = id + 1;
-// //   const client = new Client(id, clientData);
-// //   queue.push(client);
-// // }
-
-// // function deleteClientInQueue(queue, clientID) {
-// //   for (let i = 0; i < queue.length; i++) {
-// //     if (queue[i].id == clientID) {
-// //       queue.splice(i, 1);
-// //     }
-// //   }
-// // }
-
-// // addClientToQueue(queue, "Orxan");
-// // console.log(queue.length);
-// // console.log(queue);
-// // addClientToQueue(queue, "John");
-// // console.log(queue.length);
-// // console.log(queue);
-// // addClientToQueue(queue, "Smith");
-// // console.log(queue.length);
-// // console.log(queue);
-// // deleteClientInQueue(queue, 1);
-// // console.log(queue.length);
-// // console.log(queue);
-// // addClientToQueue(queue, "Elly");
-// // console.log(queue.length);
-// // console.log(queue);
-
-// // let head = document.getElementById("head");
-
-// // function colorchange() {
-// //   head.className = "color";
-// // }
-
-// // head.addEventListener("mousemove", colorchange);
-
-// const clients = [
-//   { name: "John", gender: "m", birthYear: 1974 },
-//   { name: "Bill", gender: "m", birthYear: 1985 },
-//   { name: "Clara", gender: "w", birthYear: 1994 },
-//   { name: "Ian", gender: "m", birthYear: 1940 }
-// ];
-
-// function map(array, callbackFunction) {
-//   let result = [];
-//   for (let i = 0; i < array.length; i++) {
-//     result.push(callbackFunction(array[i]));
-//   }
-//   return result;
-// }
-// function getNameOfClient(client) {
-//   return client.name;
-// }
-// function getBirthYear(client) {
-//   return client.birthYear;
-// }
-
-// let mapped = clients.map(function(client) {
-//   return client.birthYear;
-// });
-
-// let mappedTwo = clients.map(function(client) {
-//   return client.name + " " + (client.birthYear + 5);
-// });
-// console.log(mappedTwo);
-
-// const cardBalances = [100, 200, 300, 400];
-// let filtered = cardBalances.map(function(client) {
-//   return client * 2;
-// });
-
-// console.log(filtered);
-
-//cut reqemler hansilardi
-//cut reqemlerin cemini tap
-let numbers = [1, 5, 6, 7, 8, 10];
-
-let filtered = numbers.filter(function(even) {
-  return even % 2 == 0;
-});
-console.log(filtered);
-
-let mapped = numbers.map(function(even) {
-  return even % 2 == 0;
-});
-
-console.log(mapped);
-
-const arr = [1, 2, 3, 4, 5];
-
-const result = numbers.reduce(function(prev, current) {
-  return prev + current;
-}, 0);
-
-console.log(result);
+  let row =
+    `<tr class="active" id=${id}>` +
+    bankNamePart +
+    depositPart +
+    percentPart +
+    futureValuePart +
+    "</tr>";
+  return row;
+}
