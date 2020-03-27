@@ -761,10 +761,10 @@ class BankDeposit {
     const bankNamePart = "<td>" + bankName + "</td>";
     const depositPart = "<td>" + deposit + "</td>";
     const percentPart = "<td>" + percent + "</td>";
-    const futureValuePart = "<td>" + futureValue + "</td>";
+    const futureValuePart = `<td class="pulse">` + futureValue + `</td>`;
 
     let row =
-      `<tr class="active slideUp" id=${id}>` +
+      `<tr class="active" id=${id}>` +
       bankNamePart +
       depositPart +
       percentPart +
