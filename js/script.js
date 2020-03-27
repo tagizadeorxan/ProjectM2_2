@@ -591,6 +591,7 @@ class Application {
   }
 
   check() {
+    const container = document.getElementById("container");
     container.className = "noneDisplay";
     let startAmount = document.getElementById("startAmount").value;
     let monthlyDeposit = document.getElementById("monthlyDeposit").value;
@@ -622,7 +623,7 @@ class Application {
       input = new Deposit(startAmount, monthlyDeposit, depositTerm, priceInput);
       console.log(input);
       monthCheck = false;
-      bankproduct(input);
+      bankproduct(input, container);
       bankproduct.getResult(monthCheck);
     } else {
       container.className = "noneDisplay";
@@ -632,7 +633,6 @@ class Application {
     }
   }
 }
-const container = document.getElementById("container");
 
 class Deposit {
   constructor(startAmount, monthlyDeposit, depositTerm, priceInput) {
@@ -644,11 +644,12 @@ class Deposit {
 }
 
 class BankProduct {
-  constructor(input) {
+  constructor(input, container) {
     this.startAmount = input.startAmount;
     this.monthlyDeposit = input.monthlyDeposit;
     this.depositTerm = input.depositTerm;
     this.priceInput = input.priceInput;
+    this.container = container;
   }
 
   getResult(monthCheck) {
@@ -674,8 +675,6 @@ class BankProduct {
       } else {
         return (
           cal.minimumDeposit <= this.startAmount &&
-          //cal.maximumDeposit != null &&
-          // cal.maximumDeposit >= this.startAmount &&
           cal.minimumTerm <= this.depositTerm &&
           cal.MaximumTerm >= this.depositTerm &&
           cal.Currency == this.priceInput &&
@@ -683,14 +682,15 @@ class BankProduct {
         );
       }
     });
-    calculator(result);
+    calculator(result, container);
     calculator.drawTable(result);
   }
 }
 
 class Calculator {
-  constructor(result) {
+  constructor(result, container) {
     this.result = result;
+    this.container = container;
   }
   drawTable(result) {
     let bankdeposit = new BankDeposit();
