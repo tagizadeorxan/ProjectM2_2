@@ -589,7 +589,7 @@ class Application {
     let button = document.getElementById("button");
     button.addEventListener("click", this.check);
   }
-
+  //Checking input data
   check() {
     const container = document.getElementById("container");
     container.className = "noneDisplay";
@@ -630,7 +630,7 @@ class Application {
     }
   }
 }
-
+//creating new Input everytime user clicks Search button
 class Deposit {
   constructor(startAmount, monthlyDeposit, depositTerm, priceInput) {
     this.startAmount = startAmount;
@@ -656,6 +656,7 @@ class BankProduct {
   getResult(monthCheck) {
     let result = dataExcel.filter(cal => {
       if (monthCheck == true && cal.maximumDeposit != null) {
+        console.log("1");
         return (
           cal.minimumDeposit <= this.startAmount &&
           cal.maximumDeposit >= this.startAmount &&
@@ -665,6 +666,7 @@ class BankProduct {
           cal.avaliableMonthly == "TRUE"
         );
       } else if (monthCheck == true && cal.maximumDeposit == null) {
+        console.log("2");
         return (
           cal.minimumDeposit <= this.startAmount &&
           cal.minimumTerm <= this.depositTerm &&
@@ -672,13 +674,24 @@ class BankProduct {
           cal.Currency == this.priceInput &&
           cal.avaliableMonthly == "TRUE"
         );
-      } else {
+      } else if (monthCheck == false && cal.maximumDeposit != null) {
+        console.log("3");
+        return (
+          cal.minimumDeposit <= this.startAmount &&
+          cal.maximumDeposit >= this.startAmount &&
+          cal.minimumTerm <= this.depositTerm &&
+          cal.MaximumTerm >= this.depositTerm &&
+          cal.Currency == this.priceInput
+          //cal.avaliableMonthly == "FALSE"      this is for if monthly deposit is zero and  accept it meaning like he didn't want monthly payment eligible
+        );
+      } else if (monthCheck == false && cal.maximumDeposit == null) {
+        console.log("4");
         return (
           cal.minimumDeposit <= this.startAmount &&
           cal.minimumTerm <= this.depositTerm &&
           cal.MaximumTerm >= this.depositTerm &&
-          cal.Currency == this.priceInput &&
-          cal.avaliableMonthly == "FALSE"
+          cal.Currency == this.priceInput
+          // cal.avaliableMonthly == "FALSE"    this is for if monthly deposit is zero and  accept it meaning like he didn't want monthly payment eligible
         );
       }
     });
@@ -687,7 +700,7 @@ class BankProduct {
     calculator.drawTable();
   }
 }
-
+// Calculating avaliable bank offers
 class Calculator {
   constructor(result, container, input) {
     this.result = result;
@@ -696,7 +709,9 @@ class Calculator {
   }
   drawTable() {
     let bankdeposit = new BankDeposit();
+    console.log(this.result);
     this.result.sort((a, b) => (a.monthlyDeposit < b.monthlyDeposit ? 1 : -1));
+
     container.className = "noneDisplay";
     if (this.result.length < 1) {
       setTimeout(function() {
@@ -738,7 +753,7 @@ class Calculator {
     }
   }
 }
-
+// creating table for avaliable bank offers
 class BankDeposit {
   constructor() {}
   getRowCode(bankName, deposit, percent, futureValue, id) {
