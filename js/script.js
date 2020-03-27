@@ -684,8 +684,9 @@ class Calculator {
       const arr = [];
       arr[0] =
         "<table><tr><th>Bank Name</th><th>Deposit</th><th>Percent</th><th>Future Value</th></tr>";
-      for (let i = 0; i < 2; i++) {
+      for (let i = 0; i < result.length; i++) {
         const bankName = result[i].Bank;
+        console.log(bankName);
         const deposit = result[i].Deposit;
         const percent = result[i].monthlyDeposit;
         let futureValue = Number(input.startAmount);
@@ -698,14 +699,15 @@ class Calculator {
         }
 
         futureValue = futureValue - Number(input.monthlyDeposit);
-
-        arr[i + 1] = BankDeposit.getRowCode(
-          bankName,
-          deposit,
-          percent,
-          Math.round(futureValue),
-          "tr" + i
-        );
+        if (i < 2) {
+          arr[i + 1] = BankDeposit.getRowCode(
+            bankName,
+            deposit,
+            percent,
+            Math.round(futureValue),
+            "tr" + i
+          );
+        }
       }
       container.innerHTML = "<table>" + arr.join("") + "</table>";
     }
