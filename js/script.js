@@ -711,7 +711,7 @@ class Calculator {
     let bankdeposit = new BankDeposit();
     console.log(this.result);
     this.result.sort((a, b) => (a.monthlyDeposit < b.monthlyDeposit ? 1 : -1));
-
+    let maximum = this.result[0];
     container.className = "noneDisplay";
     if (this.result.length < 1) {
       setTimeout(function() {
@@ -729,6 +729,7 @@ class Calculator {
         console.log(bankName);
         const deposit = this.result[i].Deposit;
         const percent = this.result[i].monthlyDeposit;
+
         let futureValue = Number(this.input.startAmount);
         for (let i = 0; i < this.input.depositTerm; i++) {
           futureValue =
@@ -739,7 +740,7 @@ class Calculator {
         }
 
         futureValue = futureValue - Number(this.input.monthlyDeposit);
-        if (i < 2) {
+        if (this.result[i].monthlyDeposit == maximum.monthlyDeposit) {
           arr[i + 1] = bankdeposit.getRowCode(
             bankName,
             deposit,
