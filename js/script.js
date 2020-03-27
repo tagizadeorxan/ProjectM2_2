@@ -584,13 +584,56 @@ let dataExcel = [
   }
 ];
 
+class Application {
+  constructor() {
+    let button = document.getElementById("button");
+    button.addEventListener("click", this.check);
+  }
+
+  check() {
+    container.className = "noneDisplay";
+    let startAmount = document.getElementById("startAmount").value;
+    let monthlyDeposit = document.getElementById("monthlyDeposit").value;
+    let depositTerm = document.getElementById("depositTerm").value;
+    let priceInput = document.getElementById("currency").value;
+    let monthCheck = true;
+    const bankproduct = new BankProduct();
+    if (
+      startAmount > 0 &&
+      monthlyDeposit > 0 &&
+      depositTerm > 0 &&
+      depositTerm % 1 == 0
+    ) {
+      let input = new Deposit(
+        startAmount,
+        monthlyDeposit,
+        depositTerm,
+        priceInput
+      );
+      console.log(input);
+      bankproduct(input);
+      bankproduct.getResult(monthCheck);
+    } else if (
+      startAmount > 0 &&
+      monthlyDeposit == 0 &&
+      depositTerm > 0 &&
+      depositTerm % 1 == 0
+    ) {
+      input = new Deposit(startAmount, monthlyDeposit, depositTerm, priceInput);
+      console.log(input);
+      monthCheck = false;
+      bankproduct(input);
+      bankproduct.getResult(monthCheck);
+    } else {
+      container.className = "noneDisplay";
+      setTimeout(function() {
+        alert("Input is not correct");
+      }, 2000);
+    }
+  }
+}
 const container = document.getElementById("container");
-let button = document.getElementById("button");
 
-button.addEventListener("click", check);
-
-let input;
-let result = [];
 class Deposit {
   constructor(startAmount, monthlyDeposit, depositTerm, priceInput) {
     this.startAmount = startAmount;
@@ -600,79 +643,57 @@ class Deposit {
   }
 }
 
-function check() {
-  container.className = "noneDisplay";
-  let startAmount = document.getElementById("startAmount").value;
-  let monthlyDeposit = document.getElementById("monthlyDeposit").value;
-  let depositTerm = document.getElementById("depositTerm").value;
-  let priceInput = document.getElementById("currency").value;
-  let monthCheck = true;
-  if (
-    startAmount > 0 &&
-    monthlyDeposit > 0 &&
-    depositTerm > 0 &&
-    depositTerm % 1 == 0
-  ) {
-    input = new Deposit(startAmount, monthlyDeposit, depositTerm, priceInput);
-    console.log(input);
-    Application.getResult(monthCheck);
-  } else if (
-    startAmount > 0 &&
-    monthlyDeposit == 0 &&
-    depositTerm > 0 &&
-    depositTerm % 1 == 0
-  ) {
-    input = new Deposit(startAmount, monthlyDeposit, depositTerm, priceInput);
-    console.log(input);
-    monthCheck = false;
-    Application.getResult(monthCheck);
-  } else {
-    container.className = "noneDisplay";
-    setTimeout(function() {
-      alert("Input is not correct");
-    }, 2000);
+class BankProduct {
+  constructor(input) {
+    this.startAmount = input.startAmount;
+    this.monthlyDeposit = input.monthlyDeposit;
+    this.depositTerm = input.depositTerm;
+    this.priceInput = input.priceInput;
   }
-}
 
-class Application {
-  static getResult(monthCheck) {
-    result = dataExcel.filter(function(cal) {
+  getResult(monthCheck) {
+    let calculator = new Calculator();
+    let result = dataExcel.filter(function(cal) {
       if (monthCheck == true && cal.maximumDeposit != null) {
         return (
-          cal.minimumDeposit <= input.startAmount &&
-          cal.maximumDeposit >= input.startAmount &&
-          cal.minimumTerm <= input.depositTerm &&
-          cal.MaximumTerm >= input.depositTerm &&
-          cal.Currency == input.priceInput &&
+          cal.minimumDeposit <= this.startAmount &&
+          cal.maximumDeposit >= this.startAmount &&
+          cal.minimumTerm <= this.depositTerm &&
+          cal.MaximumTerm >= this.depositTerm &&
+          cal.Currency == this.priceInput &&
           cal.avaliableMonthly == "TRUE"
         );
       } else if (monthCheck == true && cal.maximumDeposit == null) {
         return (
-          cal.minimumDeposit <= input.startAmount &&
-          cal.minimumTerm <= input.depositTerm &&
-          cal.MaximumTerm >= input.depositTerm &&
-          cal.Currency == input.priceInput &&
+          cal.minimumDeposit <= this.startAmount &&
+          cal.minimumTerm <= this.depositTerm &&
+          cal.MaximumTerm >= this.depositTerm &&
+          cal.Currency == this.priceInput &&
           cal.avaliableMonthly == "TRUE"
         );
       } else {
         return (
-          cal.minimumDeposit <= input.startAmount &&
+          cal.minimumDeposit <= this.startAmount &&
           //cal.maximumDeposit != null &&
-          // cal.maximumDeposit >= input.startAmount &&
-          cal.minimumTerm <= input.depositTerm &&
-          cal.MaximumTerm >= input.depositTerm &&
-          cal.Currency == input.priceInput &&
+          // cal.maximumDeposit >= this.startAmount &&
+          cal.minimumTerm <= this.depositTerm &&
+          cal.MaximumTerm >= this.depositTerm &&
+          cal.Currency == this.priceInput &&
           cal.avaliableMonthly == "FALSE"
         );
       }
     });
-
-    Calculator.drawTable(result);
+    calculator(result);
+    calculator.drawTable(result);
   }
 }
 
 class Calculator {
-  static drawTable(result) {
+  constructor(result) {
+    this.result = result;
+  }
+  drawTable(result) {
+    let bankdeposit = new BankDeposit();
     result.sort((a, b) => (a.monthlyDeposit < b.monthlyDeposit ? 1 : -1));
     container.className = "noneDisplay";
     if (result.length < 1) {
@@ -700,7 +721,7 @@ class Calculator {
 
         futureValue = futureValue - Number(input.monthlyDeposit);
         if (i < 2) {
-          arr[i + 1] = BankDeposit.getRowCode(
+          arr[i + 1] = bankdeposit.getRowCode(
             bankName,
             deposit,
             percent,
@@ -715,7 +736,7 @@ class Calculator {
 }
 
 class BankDeposit {
-  static getRowCode(bankName, deposit, percent, futureValue, id) {
+  getRowCode(bankName, deposit, percent, futureValue, id) {
     const bankNamePart = "<td>" + bankName + "</td>";
     const depositPart = "<td>" + deposit + "</td>";
     const percentPart = "<td>" + percent + "</td>";
@@ -731,3 +752,5 @@ class BankDeposit {
     return row;
   }
 }
+
+new Application();
