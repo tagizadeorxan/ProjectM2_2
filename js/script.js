@@ -598,21 +598,17 @@ class Application {
     let depositTerm = document.getElementById("depositTerm").value;
     let priceInput = document.getElementById("currency").value;
     let monthCheck = true;
-    const bankproduct = new BankProduct();
+    let input = {};
+
     if (
       startAmount > 0 &&
       monthlyDeposit > 0 &&
       depositTerm > 0 &&
       depositTerm % 1 == 0
     ) {
-      let input = new Deposit(
-        startAmount,
-        monthlyDeposit,
-        depositTerm,
-        priceInput
-      );
+      input = new Deposit(startAmount, monthlyDeposit, depositTerm, priceInput);
       console.log(input);
-      bankproduct(input);
+      const bankproduct = new BankProduct(input, container);
       bankproduct.getResult(monthCheck);
     } else if (
       startAmount > 0 &&
@@ -623,13 +619,14 @@ class Application {
       input = new Deposit(startAmount, monthlyDeposit, depositTerm, priceInput);
       console.log(input);
       monthCheck = false;
-      bankproduct(input, container);
+      const bankproduct = new BankProduct(input, container);
       bankproduct.getResult(monthCheck);
     } else {
       container.className = "noneDisplay";
       setTimeout(function() {
         alert("Input is not correct");
-      }, 2000);
+      }, 500);
+      console.error("None correct input");
     }
   }
 }
@@ -644,17 +641,20 @@ class Deposit {
 }
 
 class BankProduct {
-  constructor(input, container) {
-    this.startAmount = input.startAmount;
-    this.monthlyDeposit = input.monthlyDeposit;
-    this.depositTerm = input.depositTerm;
-    this.priceInput = input.priceInput;
+  constructor(
+    { startAmount, monthlyDeposit, depositTerm, priceInput },
+    container
+  ) {
+    this.startAmount = startAmount;
+    this.monthlyDeposit = monthlyDeposit;
+    this.depositTerm = depositTerm;
+    this.priceInput = priceInput;
     this.container = container;
+    this.input = { startAmount, monthlyDeposit, depositTerm, priceInput };
   }
 
   getResult(monthCheck) {
-    let calculator = new Calculator();
-    let result = dataExcel.filter(function(cal) {
+    let result = dataExcel.filter(cal => {
       if (monthCheck == true && cal.maximumDeposit != null) {
         return (
           cal.minimumDeposit <= this.startAmount &&
@@ -682,44 +682,48 @@ class BankProduct {
         );
       }
     });
-    calculator(result, container);
-    calculator.drawTable(result);
+    let calculator = new Calculator(result, container, this.input);
+    console.log(result);
+    calculator.drawTable();
   }
 }
 
 class Calculator {
-  constructor(result, container) {
+  constructor(result, container, input) {
     this.result = result;
     this.container = container;
+    this.input = input;
   }
-  drawTable(result) {
+  drawTable() {
     let bankdeposit = new BankDeposit();
-    result.sort((a, b) => (a.monthlyDeposit < b.monthlyDeposit ? 1 : -1));
+    this.result.sort((a, b) => (a.monthlyDeposit < b.monthlyDeposit ? 1 : -1));
     container.className = "noneDisplay";
-    if (result.length < 1) {
+    if (this.result.length < 1) {
       setTimeout(function() {
         alert("sorry no option avaliable for this input");
-      }, 2000);
+      }, 500);
+
+      console.error("None option for input");
     } else {
       container.className = "container-design";
       const arr = [];
       arr[0] =
         "<table><tr><th>Bank Name</th><th>Deposit</th><th>Percent</th><th>Future Value</th></tr>";
-      for (let i = 0; i < result.length; i++) {
-        const bankName = result[i].Bank;
+      for (let i = 0; i < this.result.length; i++) {
+        const bankName = this.result[i].Bank;
         console.log(bankName);
-        const deposit = result[i].Deposit;
-        const percent = result[i].monthlyDeposit;
-        let futureValue = Number(input.startAmount);
-        for (let i = 0; i < input.depositTerm; i++) {
+        const deposit = this.result[i].Deposit;
+        const percent = this.result[i].monthlyDeposit;
+        let futureValue = Number(this.input.startAmount);
+        for (let i = 0; i < this.input.depositTerm; i++) {
           futureValue =
             Number(futureValue) +
             (Number(futureValue) * Number(percent)) / 12 / 100 +
-            Number(input.monthlyDeposit);
+            Number(this.input.monthlyDeposit);
           console.log(futureValue);
         }
 
-        futureValue = futureValue - Number(input.monthlyDeposit);
+        futureValue = futureValue - Number(this.input.monthlyDeposit);
         if (i < 2) {
           arr[i + 1] = bankdeposit.getRowCode(
             bankName,
@@ -736,6 +740,7 @@ class Calculator {
 }
 
 class BankDeposit {
+  constructor() {}
   getRowCode(bankName, deposit, percent, futureValue, id) {
     const bankNamePart = "<td>" + bankName + "</td>";
     const depositPart = "<td>" + deposit + "</td>";
