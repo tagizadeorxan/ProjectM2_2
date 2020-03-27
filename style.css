@@ -1,8 +1,9 @@
 body {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
   font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+  background-image: url("images/numbers-money-calculating-calculation-3305.jpg");
+  background-repeat: no-repeat;
 }
-
 div.add-form {
   border: 1px solid #cccccc;
   border-radius: 20px;
@@ -67,10 +68,7 @@ table td {
 
 h2 {
   text-align: center;
-}
-
-body {
-  font-family: "Roboto", sans-serif;
+  color: #142850;
 }
 
 .noneDisplay {
